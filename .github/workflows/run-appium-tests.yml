@@ -21,6 +21,23 @@ jobs:
       - name: Install Appium
         run: npm install -g appium
 
+      # Android SDK & Emulator setup
+      - name: Install Android SDK
+        uses: android-actions/setup-android@v3
+
+
+      - name: Create Android emulator (Android 16.0, Pixel 3)
+        run: |
+          echo "y" | sdkmanager --install 'system-images;android-16;default;armeabi-v7a'
+          echo "no" | avdmanager create avd -n pixel3-android16 -k 'system-images;android-16;default;armeabi-v7a' -d "pixel_3"
+
+      - name: Start emulator (Android 16.0, Pixel 3)
+        run: |
+          nohup emulator -avd pixel3-android16 -no-audio -no-window &
+          adb wait-for-device
+          adb shell "while [[ $(getprop sys.boot_completed) != '1' ]]; do sleep 1; done;"
+          adb shell input keyevent 82
+
       - name: Start Appium server
         run: nohup appium &
 
