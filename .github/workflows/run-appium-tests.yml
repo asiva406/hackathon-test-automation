@@ -21,28 +21,27 @@ jobs:
       - name: Install Appium
         run: npm install -g appium
 
-      - name: Install Android Emulator package
-        run: echo "y" | sdkmanager --install "emulator"
-
-      # Android SDK & Emulator setup
       - name: Install Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Install Android Emulator package
+        run: echo "y" | sdkmanager --install "emulator"
 
-      - name: Create Android emulator (Android 16.0, Pixel 3)
+      - name: Create Android emulator (Android 14, Pixel 9)
         run: |
-          echo "y" | sdkmanager --install 'system-images;android-16;default;armeabi-v7a'
-          echo "no" | avdmanager create avd -n pixel3-android16 -k 'system-images;android-16;default;armeabi-v7a' -d "pixel_3"
+          echo "y" | sdkmanager --install 'system-images;android-34;google_apis;x86_64'
+          echo "no" | avdmanager create avd -n pixel9-android14 -k 'system-images;android-34;google_apis;x86_64' -d "pixel_9"
 
-      - name: Start emulator (Android 16.0, Pixel 3)
+      - name: Start emulator (Android 14, Pixel 9)
         run: |
-          nohup emulator -avd pixel3-android16 -no-audio -no-window &
+          export PATH=$PATH:$ANDROID_HOME/emulator
+          nohup emulator -avd pixel9-android14 -no-audio -no-window &
           adb wait-for-device
           adb shell "while [[ $(getprop sys.boot_completed) != '1' ]]; do sleep 1; done;"
           adb shell input keyevent 82
 
       - name: Start Appium server
-        run: nohup appium &
+        run: nohup appium
 
       - name: Run automation tests
         run: npx wdio
