@@ -1,0 +1,28 @@
+name: Run Appium Automation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Appium
+        run: npm install -g appium
+
+      - name: Start Appium server
+        run: nohup appium &
+
+      - name: Run automation tests
+        run: npm test || npx wdio run wdio.conf.ts
