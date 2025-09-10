@@ -56,11 +56,11 @@ export const config: WebdriverIO.Config = {
     //
     capabilities: [{
         // capabilities for local Appium web tests on an Android Emulator
-    'appium:platformName': 'Android',
-    'appium:platformVersion': '14.0',
-    'appium:automationName': 'UiAutomator2',
-    'appium:deviceName': 'Pixel 9',
-    'appium:app': path.join(process.cwd(), 'app/android/ApiDemos-debug.apk')
+        'appium:platformName': 'Android',
+        'appium:platformVersion': '16',
+        'appium:automationName': 'UiAutomator2',
+        'appium:deviceName': 'Pixel 9',
+        'appium:app': path.join(process.cwd(), 'app/android/ApiDemos-debug.apk')
     }],
 
     //
