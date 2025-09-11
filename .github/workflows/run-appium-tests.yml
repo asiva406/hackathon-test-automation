@@ -40,7 +40,7 @@ env:
 jobs:
   setup-config:
     runs-on: ubuntu-latest
-    environment: QA
+    environment: TEST
     outputs:
       config-created: ${{ steps.config.outputs.result }}
     steps:
@@ -51,7 +51,7 @@ jobs:
   po-api-regression-tests:
     needs: [setup-config]
     runs-on: ubuntu-latest
-    environment: QA
+    environment: TEST
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
