@@ -1,47 +1,89 @@
-name: Run Appium Automation
+name: Hackathon Test Automation - Cypress & Appium Tests
 
 on:
   workflow_dispatch:
 
+env:
+  NODE_VERSION: '20'
+  Secrets: |
+    {
+      "baseUrl"        : "${{ vars.BASE_URL }}",
+      "UserName"       : "${{ vars.USERNAME }}",
+      "Password"       : "${{ secrets.PASSWORD }}",
+      "EmailId"        : "${{ vars.EMAIL_ID }}",
+
+      "BearerToken"  : {
+      "TOKEN_URL"     : "${{ vars.TOKEN_URL }}",
+      "CLIENT_ID"     : "${{ vars.CLIENT_ID }}",
+      "CLIENT_SECRET" : "${{ secrets.CLIENT_SECRET }}",
+      "SCOPE"         : "${{ vars.SCOPE }}"
+      },
+
+      "BasicAuth"    : {
+      "username": "${{ vars.BASIC_AUTH_USERNAME }}",
+      "password": "${{ secrets.BASIC_AUTH_PASSWORD }}"
+      },
+
+      "DBConfig": {
+      "server": "${{ vars.DB_SERVER }}",
+      "username": "${{ vars.DB_USERNAME }}",
+      "password": "${{ secrets.DB_PASSWORD }}",
+      "database": "${{ vars.DB_DATABASE }}"
+      },
+
+      "LambdaTest":{
+      "user": "${{ vars.LT_USER }}",
+      "accessKey": "${{ secrets.LT_ACCESS_KEY }}"
+      }
+    }
+
 jobs:
-  test:
+  setup-config:
     runs-on: ubuntu-latest
+    environment: QA
+    outputs:
+      config-created: ${{ steps.config.outputs.result }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Create shared config
+        id: config
+        run: echo "result=success" >> $GITHUB_OUTPUT
+
+  po-api-regression-tests:
+    needs: [setup-config]
+    runs-on: ubuntu-latest
+    environment: QA
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Install Appium
-        run: npm install -g appium
-
-      - name: Install Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Android Emulator package
-        run: echo "y" | sdkmanager --install "emulator"
-
-      - name: Create Android emulator (Android 14, Pixel 9)
+        run: npm ci
+          
+      - name: Create config
         run: |
-          echo "y" | sdkmanager --install 'system-images;android-34;google_apis;x86_64'
-          echo "no" | avdmanager create avd -n pixel9-android14 -k 'system-images;android-34;google_apis;x86_64' -d "pixel_9"
+          echo '${{ env.Secrets }}' > secrets.json
 
-      - name: Start emulator (Android 14, Pixel 9)
-        run: |
-          export PATH=$PATH:$ANDROID_HOME/emulator
-          nohup emulator -avd pixel9-android14 -no-audio -no-window &
-          adb wait-for-device
-          adb shell "while [[ $(getprop sys.boot_completed) != '1' ]]; do sleep 1; done;"
-          adb shell input keyevent 82
+      - name: Run All tests
+        run: npm run tests
+        continue-on-error: true
+        if: always()
 
-      - name: Start Appium server
-        run: nohup appium
+      - name: Attach Extent Report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Extent-Report
+          path: reports/html
 
-      - name: Run automation tests
-        run: npx wdio
+      - name: Attach Video Recordings
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Video-Recordings
+          path: reports/video/

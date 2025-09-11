@@ -11,6 +11,8 @@ export const config = {
     specs: [
         './appium/tests/*.feature'
     ],
+
+    // https://www.lambdatest.com/capabilities-generator/ -- Generate your capabilities here
     capabilities: [{
         "lt:options": {
         "platformName": "android",
