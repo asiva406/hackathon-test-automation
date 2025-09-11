@@ -9,11 +9,12 @@
         ],
         "types": [
             "node",
+            "webdriverio",
             "cypress",
             "cypress-real-events",
             "@simonsmith/cypress-image-snapshot/types"
         ],
-        "typeRoots": ["./node_modules/@types"],             
+        "typeRoots": ["./node_modules/@types", "@wdio/types"],
         "noEmit": true,
         "allowImportingTsExtensions": true,
         "resolveJsonModule": true,

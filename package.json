@@ -55,8 +55,10 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
     "wdio-cucumberjs-json-reporter": "^6.0.1",
+    "wdio-lambdatest-service": "^4.0.0",
     "wdio-video-reporter": "^6.1.1",
-    "wdio-wait-for": "^3.1.0"
+    "wdio-wait-for": "^3.1.0",
+    "webdriverio": "^9.19.2"
   },
   "cypress-cucumber-preprocessor": {
     "stepDefinitions": "cypress/e2e/features/steps/*.ts",
@@ -72,6 +74,6 @@
     "wdio": "wdio run ./wdio.conf.ts",
     "report": "ts-node cucumber-html-report.ts",
     "build": "npx cypress run --env allure=true",
-    "tests": "npx cypress run && npx wdio && node --experimental-strip-types ./cucumber-html-report.ts"
+    "tests": "npx cypress run && npx wdio ./wdio.lambdatest.conf.ts && node --experimental-strip-types ./cucumber-html-report.ts"
   }
 }

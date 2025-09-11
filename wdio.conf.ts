@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-export const config: WebdriverIO.Config = {
+export const config = {
     //
     // ====================
     // Runner Configuration
@@ -56,7 +56,7 @@ export const config: WebdriverIO.Config = {
     //
     capabilities: [{
         // capabilities for local Appium web tests on an Android Emulator
-        'appium:platformName': 'Android',
+        platformName: 'Android',
         'appium:platformVersion': '16',
         'appium:automationName': 'UiAutomator2',
         'appium:deviceName': 'Pixel 9',
@@ -134,24 +134,15 @@ export const config: WebdriverIO.Config = {
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
     reporters: [
-        'spec',
-        [
-            'cucumberjs-json',
-            {
-                jsonFolder: './reports/json/',
-                language: 'en',
-            },
+            'spec',
+            [
+                'cucumberjs-json',
+                {
+                    jsonFolder: './reports/json/',
+                    language: 'en',
+                },
+            ],
         ],
-        [
-            'video',
-            {
-                saveAllVideos: true, 
-                videoSlowdownMultiplier: 3,
-                outputDir: './reports/video/',
-                format: 'mp4', 
-            },
-        ],
-    ],
 
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
