@@ -76,14 +76,14 @@ jobs:
 
       - name: Attach Extent Report
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Extent-Report
           path: reports/html
 
       - name: Attach Video Recordings
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Video-Recordings
           path: reports/video/
