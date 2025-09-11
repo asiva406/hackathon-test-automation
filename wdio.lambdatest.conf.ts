@@ -30,4 +30,15 @@ export const config = {
         timeout: 60000,
         // Add more options as needed
     },
+
+    reporters: [
+        'spec',
+        [
+            'cucumberjs-json',
+            {
+                jsonFolder: './reports/json/',
+                language: 'en',
+            },
+        ],
+    ]
 }

@@ -74,6 +74,6 @@
     "wdio": "wdio run ./wdio.conf.ts",
     "report": "ts-node cucumber-html-report.ts",
     "build": "npx cypress run --env allure=true",
-    "tests": "npx cypress run && npx wdio ./wdio.lambdatest.conf.ts && node --experimental-strip-types ./cucumber-html-report.ts"
+    "tests": "npx cypress run && $env:NODE_TLS_REJECT_UNAUTHORIZED=0; npx wdio ./wdio.lambdatest.conf.ts && node --experimental-strip-types ./cucumber-html-report.ts"
   }
 }
