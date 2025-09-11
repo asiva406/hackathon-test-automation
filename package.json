@@ -1,9 +1,23 @@
 {
-  "name": "appium-automation",
-  "type": "module",
+  "name": "test-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "devDependencies": {
+    "@azure/storage-blob": "^12.23.0",
+    "@badeball/cypress-cucumber-preprocessor": "^22.1.0",
     "@badisi/wdio-harness": "^4.2.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "@cypress/skip-test": "^2.6.1",
+    "@shelex/cypress-allure-plugin": "^2.40.0",
+    "@simonsmith/cypress-image-snapshot": "^9.1.0",
     "@testing-library/webdriverio": "^3.2.1",
+    "@types/cypress": "^0.1.6",
+    "@types/exceljs": "^1.3.0",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.5.0",
+    "@types/tedious": "^4.0.12",
+    "@types/xlsx": "^0.0.36",
     "@wdio/appium-service": "^9.19.2",
     "@wdio/cli": "^9.19.2",
     "@wdio/cucumber-framework": "^9.19.2",
@@ -11,17 +25,53 @@
     "@wdio/mocha-framework": "^9.19.2",
     "@wdio/spec-reporter": "^9.19.2",
     "@wdio/types": "^9.19.2",
+    "ajv": "^8.12.0",
+    "allure-commandline": "^2.23.1",
     "appium": "^3.0.1",
     "appium-uiautomator2-driver": "^5.0.0",
     "appium-xcuitest-driver": "^10.0.6",
+    "axios": "^1.11.0",
+    "azure-storage": "^2.10.7",
+    "crypto": "^1.0.1",
+    "cucumber-html-reporter": "^7.2.0",
+    "cypress": "^13.17.0",
+    "cypress-ag-grid": "^3.3.2",
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "cypress-file-upload": "^5.0.8",
+    "cypress-if": "^1.10.4",
+    "cypress-real-events": "^1.10.3",
+    "cypress-skip-test": "^1.0.0",
+    "cypress-wait-until": "^3.0.2",
+    "danfojs": "^1.1.2",
+    "date-fns": "^2.30.0",
+    "exceljs": "^4.4.0",
+    "jsonwebtoken": "^9.0.2",
+    "mocha-allure-reporter": "^1.4.0",
+    "multiple-cucumber-html-reporter": "^3.9.3",
+    "mysql2": "^3.6.1",
+    "sample-apps": "^2.0.4",
+    "stream": "^0.0.2",
+    "tedious": "^18.6.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4",
     "wdio-cucumberjs-json-reporter": "^6.0.1",
+    "wdio-video-reporter": "^6.1.1",
     "wdio-wait-for": "^3.1.0"
   },
-  "scripts": {
-    "wdio": "wdio run ./wdio.conf.ts"
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": "cypress/e2e/features/steps/*.ts",
+    "nonGlobalStepDefinitions": true,
+    "filterSpecs": true,
+    "omitFiltered": true,
+    "json": {
+      "enabled": true,
+      "output": "reports/json/cucumber-report.json"
+    }
   },
-  "dependencies": {
-    "sample-apps": "^2.0.4",
-    "typescript": "^5.9.2"
+  "scripts": {
+    "wdio": "wdio run ./wdio.conf.ts",
+    "report": "ts-node cucumber-html-report.ts",
+    "build": "npx cypress run --env allure=true",
+    "tests": "npx cypress run && npx wdio && node --experimental-strip-types ./cucumber-html-report.ts"
   }
 }

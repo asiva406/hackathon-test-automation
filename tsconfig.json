@@ -1,33 +1,42 @@
 {
     "compilerOptions": {
         "moduleResolution": "node",
-        "module": "ESNext",
-        "target": "es2022",
+        "module": "node16",
+        "target": "ES2019",
         "lib": [
-            "es2022",
+            "es6",
             "dom"
         ],
         "types": [
             "node",
-            "@wdio/globals",
-            "@wdio/globals/types",
-            "expect-webdriverio",
-            "@wdio/mocha-framework",
-            "@wdio/appium-service"
+            "cypress",
+            "cypress-real-events",
+            "@simonsmith/cypress-image-snapshot/types"
         ],
-        "skipLibCheck": true,
+        "typeRoots": ["./node_modules/@types"],             
         "noEmit": true,
         "allowImportingTsExtensions": true,
         "resolveJsonModule": true,
+        "sourceMap": true,     
         "isolatedModules": true,
+        "allowSyntheticDefaultImports": true,           
+        "esModuleInterop": true,  
+        "forceConsistentCasingInFileNames": true,      
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
-        "allowJs": true // Optional, only if you have .js files
+        "allowJs": true,
+        "skipLibCheck": true, 
+        "noImplicitAny": true,
+        "experimentalDecorators": true,     
+        "emitDecoratorMetadata": true,   
+        "outDir": "./dist",                           
+        "alwaysStrict": true,          
     },
     "include": [
         "features",
-        "wdio.conf.ts"
+        "wdio.conf.ts",
+        "cypress.config.ts"
     ]
 }

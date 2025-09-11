@@ -26,7 +26,7 @@ export const config: WebdriverIO.Config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './features/**/*.feature'
+        './appium/tests/*.feature'
     ],
     // Patterns to exclude.
     exclude: [
@@ -135,19 +135,28 @@ export const config: WebdriverIO.Config = {
     // see also: https://webdriver.io/docs/dot-reporter
     reporters: [
         'spec',
-        // [
-        //     'wdio-cucumberjs-json-reporter',
-        //     {
-        //     jsonFolder: './reports/json/',
-        //     language: 'en',
-        //     },
-        // ],
+        [
+            'cucumberjs-json',
+            {
+                jsonFolder: './reports/json/',
+                language: 'en',
+            },
         ],
+        [
+            'video',
+            {
+                saveAllVideos: true, 
+                videoSlowdownMultiplier: 3,
+                outputDir: './reports/video/',
+                format: 'mp4', 
+            },
+        ],
+    ],
 
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./features/step-definitions/steps.ts'],
+        require: ['./appium/step-definitions/**.ts'],
         // <boolean> show full backtrace for errors
         backtrace: false,
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
