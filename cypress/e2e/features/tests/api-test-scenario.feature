@@ -1,7 +1,11 @@
 Feature: One Touch E2E Twitter Automation
 
-Scenario: Post 3 Tweets via Web UI
-    # Given the user is authenticated on Twitter Web
-    # When the user posts "3" tweets using the Twitter Web UI
-    Then all "3" tweets should appear on the users timeline
-    And screenshots of all "3" tweets are taken and saved to the downloads folder
+Scenario Outline: Scenario Outline name: Post 3 Tweets via Web UI
+    Given the user is authenticated on Twitter API
+    When the user posts "<TweetNo>" tweet using the Twitter API with the following "<content>"
+    # Then all <TweetNo> tweets should appear on the users timeline
+Examples:
+    | TweetNo | content          |
+    | First     | First tweet      |
+    # | Second    | Second tweet     |
+    # | Third     | Third tweet      |

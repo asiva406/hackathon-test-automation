@@ -4,7 +4,8 @@ import createBundler from "@bahmutov/cypress-esbuild-preprocessor";
 import { addCucumberPreprocessorPlugin } from "@badeball/cypress-cucumber-preprocessor";
 import createEsbuildPlugin from "@badeball/cypress-cucumber-preprocessor/esbuild";
 import { runSql } from './ProjectUtilities/runSql';
-import {createFolder,moveFile,checkfilestatus, deleteFile,createFile,checkFileStatusWithTimeout} from './ProjectUtilities/fileUtilities';
+import {createFolder,moveFile,checkfilestatus, deleteFile,checkFileStatusWithTimeout} from './ProjectUtilities/fileUtilities';
+import {getOauth1} from "./ProjectUtilities/OauthUtils";
 
 export default defineConfig({
   video: true,
@@ -37,9 +38,9 @@ export default defineConfig({
       on('task', { createFolder })
       on('task', { moveFile })
       on('task', { deleteFile })
-      on('task', { createFile })
       on('task', { checkfilestatus })
-      on('task', { checkFileStatusWithTimeout })      
+      on('task', { checkFileStatusWithTimeout })  
+      on('task', { getOauth1 })    
       allureWriter(on, config);
       return config;
     },

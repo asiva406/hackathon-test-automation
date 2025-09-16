@@ -1,12 +1,11 @@
 /// <reference types="cypress" />
 
 import {BearerToken,BasicAuth} from "../secrets.json"
-import { expect } from 'chai';
-// importing AJV npm package for JSON Schema Validation 
+
 const Ajv = require('ajv')
 const avj = new Ajv()
 
-export default class OrbitalAPIUtilities {
+export default class APIUtilities {
 
   getOAuthToken(){
     return cy.request({
@@ -144,5 +143,21 @@ export default class OrbitalAPIUtilities {
       // Expectation assertion
       expect(isValid, 'API response should be valid against the schema').to.be.true;
     });
+  }
+
+
+
+  oauth1post_request(url: any, payload: any, headers: any) {
+      return cy.request({
+        method: 'POST',
+        url: url,
+        body: payload,
+        headers: {
+        ...headers,
+        'Content-Type': 'application/json',
+      },
+      }).then((response) => {
+        return response;
+      });
   }
 }

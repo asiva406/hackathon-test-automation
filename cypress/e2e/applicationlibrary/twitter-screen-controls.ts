@@ -5,7 +5,6 @@ const phoneEmailOrUsernameInput = '[autocomplete="username"]';
 const phoneOrUsernameInput = '[data-testid="ocfEnterTextTextInput"]';
 const passwordInput = '[name="password"]';
 
-
 // Tweet actions
 const tweetTextarea = '[data-testid="tweetTextarea_0"]';
 const tweetButtonInline = '[data-testid="tweetButtonInline"]';
@@ -16,7 +15,6 @@ export default class TwitterScreenControls {
   static phoneEmailOrUsernameInput_selector = phoneEmailOrUsernameInput;
   static phoneOrUsernameInput_selector = phoneOrUsernameInput;
   static passwordInput_selector = passwordInput;
-
   static tweetCloseDialogButton_selector = closeDialogButton;
 
   get_phoneEmailOrUsernameInput() {

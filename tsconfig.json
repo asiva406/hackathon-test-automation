@@ -34,10 +34,10 @@
         "emitDecoratorMetadata": true,   
         "outDir": "./dist",                           
         "alwaysStrict": true,          
-    },
-    "include": [
-        "features",
-        "wdio.conf.ts",
-        "cypress.config.ts"
-    ]
+    }
+    // "include": [
+    //     "features",
+    //     "wdio.conf.ts",
+    //     "cypress.config.ts"
+    // ]
 }
