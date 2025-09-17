@@ -53,10 +53,9 @@ export default class twitterfunctions {
   }
 
   capture_tweet_screenshot(tweetCount: number) {
-    for (let i = 1; i < tweetCount + 1; i++) {
-      cy.get('[data-testid="cellInnerDiv"]')
-        .eq(i - 1)
-        .screenshot(`screenshots/tweet_${i}`);
+    for (let i = 2; i < tweetCount + 2; i++) {
+      cy.get('[data-testid="cellInnerDiv"]').eq(i - 1)
+        .screenshot(`tweet_${i}`);
     }
   }
 }

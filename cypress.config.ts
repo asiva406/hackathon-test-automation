@@ -20,7 +20,7 @@ export default defineConfig({
     taskTimeout: 480000,
     viewportWidth: 1920,
     viewportHeight: 1080,
-    numTestsKeptInMemory: 5,  
+    numTestsKeptInMemory: 1,  
     chromeWebSecurity: false,
     retries: 0,
 

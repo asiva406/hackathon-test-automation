@@ -1,4 +1,4 @@
-Feature: Validate all the menu items on the home screen
+Feature: Android Sample Test Scenarios
 
   Scenario: Validate all the menu items on the home screen
     Given Launch the application

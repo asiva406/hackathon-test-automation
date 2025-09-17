@@ -31,9 +31,7 @@ Then("all {string} tweets should appear on the users timeline", (Count: string) 
   }
 );
 
-Then(
-  "screenshots of all {string} tweets are taken and saved to the downloads folder",
-  (Count: string) => {
+Then("screenshots of all {string} tweets are taken and saved to the downloads folder", (Count: string) => {
     tweetCount = parseInt(Count);
     twitterFunctions.capture_tweet_screenshot(tweetCount);
   }

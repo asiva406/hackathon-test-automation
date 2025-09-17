@@ -33,6 +33,7 @@
     "appium-xcuitest-driver": "^10.0.6",
     "axios": "^1.11.0",
     "azure-storage": "^2.10.7",
+    "cross-env": "^10.0.0",
     "crypto": "^1.0.1",
     "cucumber-html-reporter": "^7.2.0",
     "cypress": "^13.17.0",
@@ -50,6 +51,7 @@
     "mocha-allure-reporter": "^1.4.0",
     "multiple-cucumber-html-reporter": "^3.9.3",
     "mysql2": "^3.6.1",
+    "npm-run-all": "^4.1.5",
     "oauth-1.0a": "^2.2.6",
     "sample-apps": "^2.0.4",
     "stream": "^0.0.2",
@@ -73,9 +75,9 @@
     }
   },
   "scripts": {
-    "wdio": "wdio run ./wdio.conf.ts",
-    "report": "ts-node cucumber-html-report.ts",
-    "build": "npx cypress run --env allure=true",
-    "tests": "npx cypress run && $env:NODE_TLS_REJECT_UNAUTHORIZED=0; npx wdio ./wdio.lambdatest.conf.ts && node --experimental-strip-types ./cucumber-html-report.ts"
+    "tests": "npm-run-all --continue-on-error cypress wdio report",
+    "cypress": "npx cypress run",
+    "wdio": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 npx wdio ./wdio.lambdatest.conf.ts",
+    "report": "node --experimental-strip-types ./cucumber-html-report.ts"
   }
 }

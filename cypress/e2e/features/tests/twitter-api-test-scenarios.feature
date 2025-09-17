@@ -1,4 +1,4 @@
-Feature: One Touch E2E Twitter Automation
+Feature: Twitter API Test Scenario
 
 Scenario Outline: Scenario Outline name: Post 3 Tweets via Web UI
     Given the user is authenticated on Twitter API

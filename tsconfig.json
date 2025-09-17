@@ -35,9 +35,4 @@
         "outDir": "./dist",                           
         "alwaysStrict": true,          
     }
-    // "include": [
-    //     "features",
-    //     "wdio.conf.ts",
-    //     "cypress.config.ts"
-    // ]
 }

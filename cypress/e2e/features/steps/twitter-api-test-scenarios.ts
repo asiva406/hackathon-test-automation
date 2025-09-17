@@ -8,10 +8,11 @@ const apiUtilities = new APIUtilities();
 Given("the user is authenticated on Twitter API", () => {
 
   cy.task("getOauth1",{ url: 'https://api.twitter.com/2/tweets',  method: 'POST',  data: { text: "Hello, this is a tweet from Cypress!" }}).then((headers: any) => {
+    const timestamp = new Date().toISOString();
     const request_data = {
       url: 'https://api.twitter.com/2/tweets',
       method: 'POST',
-      data: { text: "Hello, this is a tweet from Cypress - 1234!" }
+      data: { text: `Hello, this is a tweet from Cypress - ${timestamp}!` }
     };
 
     apiUtilities.oauth1post_request(request_data.url, request_data.data, headers).then((response) => {

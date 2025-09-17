@@ -19,6 +19,13 @@ env:
       "SCOPE"         : "${{ vars.SCOPE }}"
       },
 
+      "oauth1": {
+      "REQUEST_TOKEN_URL" : "${{ vars.REQUEST_TOKEN_URL }}",
+      "ACCESS_TOKEN_URL"  : "${{ vars.ACCESS_TOKEN_URL }}",
+      "CLIENT_ID"         : "${{ vars.CLIENT_ID }}",
+      "CLIENT_SECRET"     : "${{ secrets.CLIENT_SECRET }}"
+      },
+
       "BasicAuth"    : {
       "username": "${{ vars.BASIC_AUTH_USERNAME }}",
       "password": "${{ secrets.BASIC_AUTH_PASSWORD }}"
