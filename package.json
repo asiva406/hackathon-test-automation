@@ -78,6 +78,6 @@
     "tests": "npm-run-all --continue-on-error cypress wdio report",
     "cypress": "npx cypress run",
     "wdio": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 npx wdio ./wdio.lambdatest.conf.ts",
-    "report": "node --experimental-strip-types ./cucumber-html-report.ts"
+    "report": "node ./cucumber-html-report.ts"
   }
 }
