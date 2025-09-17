@@ -20,10 +20,10 @@ env:
       },
 
       "oauth1": {
-      "REQUEST_TOKEN_URL" : "${{ vars.REQUEST_TOKEN_URL }}",
-      "ACCESS_TOKEN_URL"  : "${{ vars.ACCESS_TOKEN_URL }}",
-      "CLIENT_ID"         : "${{ vars.CLIENT_ID }}",
-      "CLIENT_SECRET"     : "${{ secrets.CLIENT_SECRET }}"
+      "consumer_key" : "${{ secrets.REQUEST_TOKEN_URL }}",
+      "consumer_secret"  : "${{ secrets.ACCESS_TOKEN_URL }}",
+      "access_token"         : "${{ secrets.CLIENT_ID }}",
+      "access_token_secret"     : "${{ secrets.CLIENT_SECRET }}"
       },
 
       "BasicAuth"    : {
