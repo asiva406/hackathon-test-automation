@@ -1,12 +1,10 @@
-
-import report from "multiple-cucumber-html-reporter";
-import fs from "fs";
-
+const report = require("multiple-cucumber-html-reporter");
+const fs = require("fs");
 
 const jsonDir = "reports/json/";
-const jsonFiles = fs.readdirSync(jsonDir).filter((f: string) => f.endsWith('.json'));
+const jsonFiles = fs.readdirSync(jsonDir).filter(f => f.endsWith('.json'));
 
-jsonFiles.forEach((file: string) => {
+jsonFiles.forEach(file => {
     console.log("Checking file:", file);
     if (file.toLowerCase().includes("android") || file.toLowerCase().includes("andriod")) {
       const jsonPath = `${jsonDir}${file}`;
@@ -15,7 +13,7 @@ jsonFiles.forEach((file: string) => {
         const data = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
         let updated = false;
         if (Array.isArray(data)) {
-          data.forEach((feature: any) => {
+          data.forEach(feature => {
             feature.metadata = {
               browser: { name: "NA", version: "NA" },
               device: "Google Pixel 9",
